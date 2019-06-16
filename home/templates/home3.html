@@ -12,7 +12,7 @@
         </div>
 
         <div class="col-6">
-            <h1>Seja bem vindo home 2</h1>
+            <h1>Seja bem vindo home 3</h1>
         </div>
 
         <div class="col-sm">
@@ -24,6 +24,11 @@
             {% endif %}
         </div>
     </div>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Enviar</button>
+</form>
 
 {% endblock %}
 
