@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Person
 from .forms import PersonForm
+from django.utils import timezone
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 
 @login_required
 def persons_list(request):
@@ -45,3 +47,11 @@ def persons_delete(request, id):
   
 class PersonList(ListView):
     model=Person
+
+class PensonDetail(DetailView):
+    model=Person
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context

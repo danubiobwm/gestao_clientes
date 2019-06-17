@@ -12,8 +12,9 @@
 
     {% for person in object_list %}
     
-        {{ person }}
-    
+       <a href="{% url 'person_detail_cbv' person.pk %}"> {{ person }} </a>
+       <br>
+      
     {% endfor %}
     
 </body>
