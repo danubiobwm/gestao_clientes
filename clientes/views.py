@@ -5,6 +5,7 @@ from .forms import PersonForm
 from django.utils import timezone
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView
 
 @login_required
 def persons_list(request):
@@ -55,3 +56,8 @@ class PensonDetail(DetailView):
         context = super().get_context_data(**kwargs)
         context['now'] = timezone.now()
         return context
+
+class PersonCreate(CreateView):
+    model=Person
+    fields=['first_name', 'last_name', 'age', 'salary', 'bio', 'photo']
+    success_url='/clientes/person_list'
