@@ -2,7 +2,8 @@ from django.urls import path
 from .views import(
  persons_list,persons_new,
  persons_update, persons_delete,
- PersonList, PensonDetail, PersonCreate )
+ PersonList, PensonDetail, PersonCreate,
+ PersonUpdate, PersonDelete )
 
 
 urlpatterns = [
@@ -10,7 +11,10 @@ urlpatterns = [
     path('new/', persons_new, name="person_new"),
     path('update/<int:id>/', persons_update, name="persons_update"),
     path('delete/<int:id>/', persons_delete, name="persons_delete"),
+    ####
     path('person_list', PersonList.as_view(), name='person_list_cbv'),
     path('person_detail/<int:pk>', PensonDetail.as_view(), name='person_detail_cbv' ),
+    path('person_update/<int:pk>', PersonUpdate.as_view(), name='person_update_cbv' ),
+    path('person_delete/<int:pk>', PersonDelete.as_view(), name='person_delete_cbv' ),
     path('person_create/', PersonCreate.as_view(), name='person_create_cbv' ),
 ]
