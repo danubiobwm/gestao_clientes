@@ -14,7 +14,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 @login_required
 def persons_list(request):
     persons = Person.objects.all()
-    return render(request, 'person.html', {'persons': persons})
+    footer_message = 'Desenvolvimento web com Django 2.0'
+    return render(request, 'person.html', {'persons': persons, 'footer_message':footer_message })
 
 
 @login_required
