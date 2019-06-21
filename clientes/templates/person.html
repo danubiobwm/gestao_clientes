@@ -20,7 +20,8 @@
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
                     </li>
-
+                    {% empty %}
+                    <li>Sorry, no clientes in this list.</li>
                 {% endfor %}
             </ul>
 
