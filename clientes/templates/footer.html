@@ -1,5 +1,11 @@
+{% load my_tags %}
+{% load filters %}
 <footer class="footer">
     <div class="container">
-      <span class="text-muted">{{footer_message}}</span>
+      <span class="text-muted footer_message">{% footer_message %}</span>
+        <div id="hora_server">
+            {% current_time "%d-%m-%Y / %I:%M %p" as the_time %}
+            <p>Hora do Servidor: {{ the_time }}.</p>
+        </div>
     </div>
-  </footer>
+</footer>

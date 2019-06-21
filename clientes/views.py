@@ -14,8 +14,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 @login_required
 def persons_list(request):
     persons = Person.objects.all()
-    footer_message = 'Desenvolvimento web com Django 2.0x'
-    return render(request, 'person.html', {'persons': persons, 'footer_message':footer_message })
+    return render(request, 'person.html', {'persons': persons})
 
 
 @login_required
@@ -43,13 +42,12 @@ def persons_update(request, id):
 @login_required
 def persons_delete(request, id):
     person = get_object_or_404(Person, pk=id)
-    footer_message = 'Desenvolvimento web com Django 2.0'
 
     if request.method == 'POST':
         person.delete()
         return redirect('person_list')
 
-    return render(request, 'person_delete_confirm.html', {'person': person , 'footer_message': footer_message})
+    return render(request, 'person_delete_confirm.html', {'person': person })
 
   
 class PersonList(ListView):

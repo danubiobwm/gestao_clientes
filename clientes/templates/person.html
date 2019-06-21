@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
-{% load filters %}
-{% load my_tags %}
+
 
 {% block title %} Administracao {% endblock %}
 
@@ -16,7 +15,7 @@
             <ul class="list-group">
                 {% for person in persons %}
                     <li class="list-group-item">
-                        <a href="{% url 'persons_update' person.id %}">{{ person.first_name }}</a>
+                        <a href="{% url 'persons_update' person.id %}">{{ person.nome_completo|title }}</a>
                         <a href="{% url 'persons_delete' person.id %}" class="trash-item">
                             <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
@@ -46,17 +45,7 @@
 
 
 
-
-{{ footer_message|my_filter }}
-{{ 123.3445|arredonda:1 }}
-
-<h4>
-    {% current_time "%d-%m-%Y / %I:%M %p" as the_time %}
-    <p>Hora do Servidor: {{ the_time }}.</p>
-</h4>
-
 {% endblock %}
-
 
 {% block footer %}
     {% include 'footer.html' %}
