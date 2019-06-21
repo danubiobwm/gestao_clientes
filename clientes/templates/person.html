@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
-
-
-
+{% load filters %}
+{% load my_tags %}
 
 {% block title %} Administracao {% endblock %}
 
@@ -45,6 +44,16 @@
         </div>
     </div>
 
+
+
+
+{{ footer_message|my_filter }}
+{{ 123.3445|arredonda:1 }}
+
+<h4>
+    {% current_time "%d-%m-%Y / %I:%M %p" as the_time %}
+    <p>Hora do Servidor: {{ the_time }}.</p>
+</h4>
 
 {% endblock %}
 
