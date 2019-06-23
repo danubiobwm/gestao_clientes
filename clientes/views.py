@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Person
+from .models import Person, Produto
 from .forms import PersonForm
 from django.utils import timezone
+from django.views.generic import View
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.http import HttpResponse
 
 
 
@@ -77,3 +79,16 @@ class PersonDelete(LoginRequiredMixin, PermissionRequiredMixin , DeleteView):
     #success_url= reverse_lazy ('person_list_cbv')
     def get_success_url(self):
         return reverse_lazy('person_list_cbv')
+
+###ProdutoBulk 
+
+class ProdutoBulk(View):
+    def get(self, resquest):
+        produtos=['Banana', 'Maça', 'Limão', 'Pera', 'Melancia']
+        list_produtos=[]
+
+        for produto in produtos:
+            p = Produto(descricao=produto, preco=10)
+            list_produtos.append(p)
+        Produto.objects.bulk_create(list_produtos)
+        return HttpResponse('Funcionou')

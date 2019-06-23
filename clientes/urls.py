@@ -3,7 +3,7 @@ from .views import(
  persons_list,persons_new,
  persons_update, persons_delete,
  PersonList, PensonDetail, PersonCreate,
- PersonUpdate, PersonDelete )
+ PersonUpdate, PersonDelete, ProdutoBulk )
 
 
 urlpatterns = [
@@ -17,4 +17,5 @@ urlpatterns = [
     path('person_update/<int:pk>', PersonUpdate.as_view(), name='person_update_cbv' ),
     path('person_delete/<int:pk>', PersonDelete.as_view(), name='person_delete_cbv' ),
     path('person_create/', PersonCreate.as_view(), name='person_create_cbv' ),
+    path('person_bulk/', ProdutoBulk.as_view(), name='person_bulk_cbv' ),
 ]
