@@ -10,6 +10,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import HttpResponse
+from .models import Venda
 
 
 
@@ -57,11 +58,16 @@ class PersonList(ListView):
 
 class PensonDetail(DetailView):
     model=Person
+    def get_object(self, queryset=None):
+        pk=self.kwargs.get(self.pk_url_kwarg)
+        return Person.objects.select_related('doc').get(id=pk) 
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['now'] = timezone.now()
-        return context
+         context = super().get_context_data(**kwargs)
+         context['now'] = timezone.now()
+         context['vendas'] = Venda.objects.filter( pessoa_id=self.object.id )
+         return context
+    
 
 class PersonCreate(CreateView):
     model=Person
