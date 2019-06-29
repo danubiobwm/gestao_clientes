@@ -10,15 +10,32 @@ class PersonAdmin(admin.ModelAdmin):
     )
     
     #fields=('doc', 'first_name', 'last_name', 'age', 'salary', 'bio', 'photo'  )
-    list_display = ('doc', 'first_name', 'last_name', 'age', 'salary',
-     'bio', 'photo' )
-    
     list_filter = ('age', 'salary')
+    list_display = ('doc', 'first_name', 'last_name', 'age', 'salary',
+     'bio', 'tem_foto' )
+
+    def tem_foto(self, obj):
+        if obj.photo:
+            return 'Sim'
+        else:
+            return 'Não'
+    tem_foto.shor_description = 'Possui Foto'
+
 
 class VendaAdmin(admin.ModelAdmin):
     list_filter = ('pessoa__doc', 'desconto')
+    list_display=('id', 'pessoa', 'total')
+
+    def total(self, obj):
+        return obj.get_total()
+
+    total.shor_description='total'
+
+class ProdutoAdmin(admin.ModelAdmin):
+    list_display = ('id', 'descricao', 'preco')
+
 
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Documento)
 admin.site.register(Venda, VendaAdmin)
-admin.site.register(Produto)
+admin.site.register(Produto, ProdutoAdmin)
