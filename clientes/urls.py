@@ -19,3 +19,4 @@ urlpatterns = [
     path('person_create/', PersonCreate.as_view(), name='person_create_cbv' ),
     path('person_bulk/', ProdutoBulk.as_view(), name='person_bulk_cbv' ),
 ]
+
