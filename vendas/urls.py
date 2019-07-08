@@ -1,13 +1,8 @@
 from django.urls import path
-#from .views import(
-# persons_list,persons_new,
-# persons_update, persons_delete,
-# PersonList, PensonDetail, PersonCreate,
-# PersonUpdate, PersonDelete, ProdutoBulk )
-
+from .views import DashboardView
 
 urlpatterns = [
-   # path('list/', persons_list, name="person_list"),
+    path('dashboard/', DashboardView.as_view(), name="dashboard"),
   
 ]
 
