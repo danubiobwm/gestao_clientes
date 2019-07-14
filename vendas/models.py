@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from clientes.models import Person
 from produtos.models import Produto
+from .managers import VendaManager
 
 class Venda(models.Model):
     numero = models.CharField(max_length=7)
@@ -12,6 +13,17 @@ class Venda(models.Model):
     impostos = models.DecimalField(max_digits=5, decimal_places=2,  default=0)
     pessoa = models.ForeignKey(Person, null=True, blank=True, on_delete=models.PROTECT)
     nfe_emitida = models.BooleanField(default=False)
+
+    objects = VendaManager()
+
+    class Meta:
+        permissions=(
+            ('setar_nfe', 'Usuario pode alterar paramento NF-e'),
+            ('ver_dashboard', 'Pode visualizar o Dashboard'),
+            ('permissao3', 'Permissao 3'),
+        )
+
+
   
     def calcular_total(self):
         tot=self.itemdopedido_set.all().aggregate(

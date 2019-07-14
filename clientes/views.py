@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .models import Person
 from produtos.models import Produto
@@ -23,6 +23,11 @@ def persons_list(request):
 
 @login_required
 def persons_new(request):
+    if not request.user.has_perm('clientes.add_person'):
+        return HttpResponse('Não Autorizado')
+    elif not request.user.is_superuser:
+        return HttpResponse('Não é Super Usuario')
+
     form = PersonForm(request.POST or None, request.FILES or None)
 
     if form.is_valid():
@@ -54,10 +59,10 @@ def persons_delete(request, id):
     return render(request, 'person_delete_confirm.html', {'person': person })
 
   
-class PersonList(ListView):
+class PersonList(LoginRequiredMixin, ListView):
     model=Person
 
-class PensonDetail(DetailView):
+class PensonDetail(LoginRequiredMixin, DetailView):
     model=Person
     def get_object(self, queryset=None):
         pk=self.kwargs.get(self.pk_url_kwarg)
@@ -70,22 +75,23 @@ class PensonDetail(DetailView):
          return context
     
 
-class PersonCreate(CreateView):
+class PersonCreate(LoginRequiredMixin, CreateView):
     model=Person
     fields=['first_name', 'last_name', 'age', 'salary', 'bio', 'photo']
     success_url='/clientes/person_list'
 
-class PersonUpdate(UpdateView):
+class PersonUpdate(LoginRequiredMixin, UpdateView):
     model=Person
     fields=['first_name', 'last_name', 'age', 'salary', 'bio', 'photo']
     success_url= reverse_lazy ('person_list_cbv')
 
 class PersonDelete(LoginRequiredMixin, PermissionRequiredMixin , DeleteView):
-    permission_required={ 'clientes.deletar_clientes' }
+    permission_required = ('clientes.deletar_clientes',)
+
     model=Person
-    #success_url= reverse_lazy ('person_list_cbv')
-    def get_success_url(self):
-        return reverse_lazy('person_list_cbv')
+    success_url= reverse_lazy ('person_list_cbv')
+    #def get_success_url(self):
+        #return reverse_lazy('person_list_cbv')
 
 ###ProdutoBulk 
 
