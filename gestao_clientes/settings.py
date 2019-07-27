@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['gestao-clientes2.herokuapp.com', 'localhost']
 
 INTERNAL_IPS = [ '127.0.0.1' ]
 # Application definition
+ADMIN = ['Danubio', 'danubio@gmail.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -56,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'mymiddlewares.MetaData.MetaData',
 ]
 
 ROOT_URLCONF = 'gestao_clientes.urls'
@@ -140,6 +142,16 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_URL = '/statics/'
+
+##Configura o servidor SMTP 
+#   EMAIL_HOST= 'Examlemail.d.com.br'
+#   EMAIL_PORT = 25
+#   EMAIL_HOST_USER='d@gmail.com'
+#   EMAIL_HOST_PASSWORD='DjA@2019'
+#   EMAIL_USE_TLS=False
+#   SERVER_EMAIL='SIS@NOME.COM.BR'
+
+
 
 # AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 # AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')

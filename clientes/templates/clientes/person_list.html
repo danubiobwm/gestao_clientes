@@ -10,6 +10,9 @@
 
     <h1>Listagem de pessoa</h1>
 
+    {{ message }}
+<p></br></p>
+
     {% for person in object_list %}
     
        <a href="{% url 'person_detail_cbv' person.pk %}"> {{ person }} </a>
