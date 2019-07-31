@@ -14,6 +14,7 @@ import os
 from decouple import config
 from dj_database_url import parse as dburl
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -42,18 +43,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrapform',
-
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-
-    'allauth.socialaccount.providers.facebook',
-
     'clientes',
     'home',
     'produtos',
     'vendas',
     'debug_toolbar',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+
+   
 ]
 
 SITE_ID = 1
@@ -155,10 +156,10 @@ LOGIN_REDIRECT_URL = 'person_list'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "statics"),
+   'statics',
 ]
 
-STATIC_URL = '/statics/'
+STATIC_URL = '/static/'
 
 ##Configura o servidor SMTP 
 #   EMAIL_HOST= 'Examlemail.d.com.br'
