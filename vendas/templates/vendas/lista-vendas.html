@@ -12,6 +12,7 @@
         <th scope="col">Desconto</th>
         <th scope="col">valor</th>
         <th scope="col">Editar</th>
+        <th scope="col">Excluir</th>
         </tr>
     </thead>
     <tbody>
@@ -22,14 +23,21 @@
             <td>{{ venda.desconto }}</td>
             <td>{{ venda.valor }}</td>
             <td>
-                <a href="{% url 'novo-item-pedido' venda.id %}">
+                <a href="{% url 'edit-pedido' venda.id %}">
                 Editar
                 </a>
             </td>
+            <td>
+                    <a href="{% url 'delete-pedido' venda.id %}">
+                    Excluir
+                    </a>
+                </td>
         </tr>
-{% endfor %}
+        {% endfor %}
     </tbody>
 </table>
+
+<a href="{% url 'novo-pedido' %}">Nova Venda</a>
 
 
 {% endblock %}

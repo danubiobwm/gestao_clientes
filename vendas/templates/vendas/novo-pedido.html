@@ -3,17 +3,18 @@
 
 {% block main %}
     
-<h1>Novo-Pedido</h1>
+<h1>Novo Pedido</h1>
 
-<form method="POST">
+<form method="POST" action="{% 'novo-pedido' %}">
 {% csrf_token %}
-<h2>Cabeçalho pedido numero: {{ venda_obj.numero }}</h2>
-<input type="text" name="numero" class="form-control" value="{{ numero }}">
+<h2>Cabeçalho pedido numero: {{ venda.numero }}</h2>
+<input type="text" name="numero" class="form-control" value="{{numero}}">
 
-<input type="text" name="desconto" id="desconto" value="{{ desconto }}"
+<label for="desconto">Desconto</label></br>
+<input type="text" name="desconto" id="desconto" value="{{desconto}}"
 placeholder="Desconto" class="form-control">
 
-<input type="hidden" value="{{ venda_obj.id }}" name="venda_id">
+<input type="hidden" value="{{venda.id}}" name="venda_id">
 <br>
 <button type="submit" class="btn btn-main">Enviar</button>
 </form>
@@ -22,10 +23,10 @@ placeholder="Desconto" class="form-control">
 
 {% block extra %}
 
-    {% if venda_obj %}
-        <form action="{% url 'novo-item-pedido' venda_obj.id %}" method="POST">
+    {% if venda %}
+        <form action="{% url 'novo-item-pedido' venda.id %}" method="POST">
             {% csrf_token %}
-            {{ form_item }}
+            {{form_item}}
             <button class="btn btn-info">Incluir</button>
         </form>
    
@@ -45,6 +46,7 @@ placeholder="Desconto" class="form-control">
                 <td>{{ item.produto.descricao }}</td>
                 <td>{{ item.quantidade }}</td>
                 <td>{{ item.desconto }}</td>
+                <th scope="col"><a href="{% url 'delete-item-pedido' item.id %}">Excluir</a></th>
             </tr>
             {% endfor %}
         </tbody>
